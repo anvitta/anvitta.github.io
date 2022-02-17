@@ -1,0 +1,36 @@
+
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <link rel="shortcut icon" href="favicon.ico">
+  
+          <title>3Bewte Video Meet Portal</title>
+        <script src='https://8x8.vc/external_api.js' async></script>
+        <style>html, body, #jaas-container { height: 100%; }</style>
+        <script type="text/javascript">
+            function getParameterByName(name, url = window.location.href) {
+                console.log(window.location.href);
+                name = name.replace(/[\[\]]/g, '\\$&');
+                var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                    results = regex.exec(url);
+                console.log(results);
+                if (!results) return null;
+                if (!results[2]) return '';
+                return decodeURIComponent(results[2].replace(/\+/g, ' '));
+            }
+          window.onload = () => {
+            meetId = getParameterByName("id");
+            if(!meetId) {
+                document.getElementById("jaas-container").innerHTML="Invalid meeting link";
+                return;
+            }
+            const api = new JitsiMeetExternalAPI("8x8.vc", {
+              roomName: "vpaas-magic-cookie-6b82977f4ae54be59618d21799f4aaf4/"+meetId,
+              parentNode: document.querySelector('#jaas-container')
+            });
+          }
+        </script>
+      </head>
+      <body style="margin:0px"><div id="jaas-container" /></body>
+    </html>
+  
